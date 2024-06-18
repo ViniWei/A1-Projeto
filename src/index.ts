@@ -20,7 +20,6 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Working!");
 });
 
-app.use("/ping/", pingRoutes);
 app.use("/users/", userRoutes);
 
 app.use(
