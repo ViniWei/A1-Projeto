@@ -13,6 +13,8 @@ const port = process.env.PORT || 4000;
 const DATABASE_URL = process.env.DATABASE_URL || "";
 
 connect(DATABASE_URL);
+
+app.use(express.json())
 	
 app.get("/", (req: Request, res: Response) => {
   res.send("Working!");

@@ -7,7 +7,7 @@ const express_1 = __importDefault(require("express"));
 const UserController_1 = __importDefault(require("../controllers/UserController"));
 const router = express_1.default.Router();
 router.post("/create", async (req, res) => {
-    console.log("req:", req);
+    console.log("req:", req.body);
     const controller = new UserController_1.default();
     const response = await controller.create(req.body);
     return res.send(response);

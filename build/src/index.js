@@ -14,6 +14,7 @@ const app = (0, express_1.default)();
 const port = process.env.PORT || 4000;
 const DATABASE_URL = process.env.DATABASE_URL || "";
 (0, database_1.connect)(DATABASE_URL);
+app.use(express_1.default.json());
 app.get("/", (req, res) => {
     res.send("Working!");
 });
