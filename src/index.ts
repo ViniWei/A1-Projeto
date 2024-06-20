@@ -1,6 +1,5 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
-import pingRoutes from './routes/pingRoutes'
 import userRoutes from './routes/UserRoutes'
 import swaggerUi from 'swagger-ui-express'
 import { connect } from "./service/database"

@@ -16,21 +16,27 @@ const tsoa_1 = require("tsoa");
 const UserModel_1 = require("../models/UserModel");
 let UserController = class UserController {
     async create(body) {
-        try {
-            return body.name;
-        }
-        catch (e) {
-            console.log(e);
-            return JSON.stringify(e);
-        }
         const data = new UserModel_1.UserModel({
             name: body.name,
             email: body.email,
             password: body.password
         });
         try {
-            data.save();
+            await data.save();
             return "Ok";
+        }
+        catch (error) {
+            return JSON.stringify(error);
+        }
+    }
+    async remove(id) {
+        try {
+            const user = await UserModel_1.UserModel.findByIdAndDelete(id);
+            console.log("user:", user);
+            if (!user) {
+                return "User not found";
+            }
+            return "User deleted";
         }
         catch (error) {
             return JSON.stringify(error);
@@ -44,7 +50,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "create", null);
+__decorate([
+    (0, tsoa_1.Delete)("/remove/{id}"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "remove", null);
 UserController = __decorate([
-    (0, tsoa_1.Route)("api/user")
+    (0, tsoa_1.Route)("users")
 ], UserController);
 exports.default = UserController;

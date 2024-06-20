@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
-const pingRoutes_1 = __importDefault(require("./routes/pingRoutes"));
 const UserRoutes_1 = __importDefault(require("./routes/UserRoutes"));
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 const database_1 = require("./service/database");
@@ -18,7 +17,6 @@ app.use(express_1.default.json());
 app.get("/", (req, res) => {
     res.send("Working!");
 });
-app.use("/ping/", pingRoutes_1.default);
 app.use("/users/", UserRoutes_1.default);
 app.use("/swagger", /* endereço do swagger */ swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(undefined, {
     swaggerOptions: {

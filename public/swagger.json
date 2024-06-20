@@ -6,20 +6,7 @@
 		"parameters": {},
 		"requestBodies": {},
 		"responses": {},
-		"schemas": {
-			"PingResponse": {
-				"properties": {
-					"message": {
-						"type": "string"
-					}
-				},
-				"required": [
-					"message"
-				],
-				"type": "object",
-				"additionalProperties": false
-			}
-		},
+		"schemas": {},
 		"securitySchemes": {}
 	},
 	"info": {
@@ -31,26 +18,7 @@
 		"contact": {}
 	},
 	"paths": {
-		"/api/ping": {
-			"get": {
-				"operationId": "GetMessage",
-				"responses": {
-					"200": {
-						"description": "Ok",
-						"content": {
-							"application/json": {
-								"schema": {
-									"$ref": "#/components/schemas/PingResponse"
-								}
-							}
-						}
-					}
-				},
-				"security": [],
-				"parameters": []
-			}
-		},
-		"/api/user/create": {
+		"/users/create": {
 			"post": {
 				"operationId": "Create",
 				"responses": {
@@ -93,6 +61,34 @@
 						}
 					}
 				}
+			}
+		},
+		"/users/remove/{id}": {
+			"delete": {
+				"operationId": "Remove",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
 			}
 		}
 	},

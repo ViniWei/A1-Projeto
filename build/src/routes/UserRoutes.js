@@ -12,4 +12,11 @@ router.post("/create", async (req, res) => {
     const response = await controller.create(req.body);
     return res.send(response);
 });
+router.delete("/delete/:id", async (req, res) => {
+    const id = req.params.id;
+    console.log(id);
+    const controller = new UserController_1.default();
+    const response = await controller.remove(id);
+    return res.send(response);
+});
 exports.default = router;

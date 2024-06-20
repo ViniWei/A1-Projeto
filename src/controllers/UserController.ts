@@ -1,17 +1,10 @@
-import { Route, Post, Body } from 'tsoa'
+import { Route, Post, Body, Delete } from 'tsoa'
 import { UserModel } from '../models/UserModel'
 
-@Route("api/user")
+@Route("users")
 export default class UserController {
     @Post("/create")
     public async create(@Body() body: { name: string, email: string, password: string }): Promise<string> {
-        try {
-            return body.name;
-        } catch(e) {
-            console.log(e);
-            return JSON.stringify(e);
-        }
-
         const data = new UserModel({
             name: body.name,
             email: body.email,
@@ -19,8 +12,24 @@ export default class UserController {
         })
 
         try {
-            data.save()
+            await data.save()
             return "Ok"
+        } catch (error) {
+            return JSON.stringify(error)
+        }
+    }
+
+    @Delete("/remove/{id}")
+    public async remove(id: string): Promise<string> {
+        try {
+            const user = await UserModel.findByIdAndDelete(id);
+            console.log("user:", user);
+
+            if (!user) {
+                return "User not found"
+            }
+
+            return "User deleted"
         } catch (error) {
             return JSON.stringify(error)
         }
