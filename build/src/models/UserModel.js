@@ -9,5 +9,6 @@ const mongoose_2 = require("mongoose");
 const userSchema = new mongoose_2.Schema({
     name: String,
     email: String,
+    password: String
 }, { autoCreate: false, autoIndex: true });
 exports.UserModel = mongoose_1.default.model('User', userSchema);
