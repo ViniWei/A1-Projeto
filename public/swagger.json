@@ -18,6 +18,18 @@
 		"contact": {}
 	},
 	"paths": {
+		"/users/getAll": {
+			"get": {
+				"operationId": "GetAll",
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		},
 		"/users/create": {
 			"post": {
 				"operationId": "Create",

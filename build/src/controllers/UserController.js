@@ -15,6 +15,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const tsoa_1 = require("tsoa");
 const UserModel_1 = require("../models/UserModel");
 let UserController = class UserController {
+    async getAll() {
+        try {
+            const userList = UserModel_1.UserModel.find();
+            return userList;
+        }
+        catch (_a) {
+            return "Internal server error";
+        }
+    }
     async create(body) {
         const data = new UserModel_1.UserModel({
             name: body.name,
@@ -32,17 +41,22 @@ let UserController = class UserController {
     async remove(id) {
         try {
             const user = await UserModel_1.UserModel.findByIdAndDelete(id);
-            console.log("user:", user);
             if (!user) {
                 return "User not found";
             }
             return "User deleted";
         }
-        catch (error) {
-            return JSON.stringify(error);
+        catch (_a) {
+            return "Internal server error";
         }
     }
 };
+__decorate([
+    (0, tsoa_1.Get)("/getAll"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getAll", null);
 __decorate([
     (0, tsoa_1.Post)("/create"),
     __param(0, (0, tsoa_1.Body)()),

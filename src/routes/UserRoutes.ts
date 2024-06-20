@@ -3,6 +3,13 @@ import UserController from '../controllers/UserController'
 
 const router = express.Router()
 
+router.get("/getAll", async (req: Request, res: Response) => {
+    console.log("req:", req.body);
+    const controller = new UserController();
+    const response = await controller.getAll();
+    return res.send(response)
+})
+
 router.post("/create", async (req: Request, res: Response) => {
     console.log("req:", req.body);
     const controller = new UserController();
