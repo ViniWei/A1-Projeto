@@ -14,7 +14,7 @@ const port = process.env.PORT || 4000;
 const DATABASE_URL = process.env.DATABASE_URL || "";
 (0, database_1.connect)(DATABASE_URL);
 app.use(express_1.default.json());
-app.get("/", (req, res) => {
+app.get("/", (_req, res) => {
     res.send("Working!");
 });
 app.use("/users/", UserRoutes_1.default);

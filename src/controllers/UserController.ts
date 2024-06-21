@@ -29,6 +29,30 @@ export default class UserController {
         }
     }
 
+    @Post("/update/{id}")
+    public async update(id: string, @Body() body: { name: string, email: string, password: string }): Promise<string> {
+
+        try {
+
+            const data = new User({
+                _id: id,
+                name: body.name,
+                email: body.email,
+                password: body.password
+            })
+
+            const user = await User.findByIdAndUpdate(id, data);
+            console.log("user:", user);
+            if (!user) {
+                return "User not found"
+            }
+
+            return "User updated";
+        } catch (error) {
+            return JSON.stringify(error);
+        }
+    }
+
     @Delete("/remove/{id}")
     public async remove(id: string): Promise<string> {
             try {

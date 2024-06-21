@@ -15,7 +15,7 @@ connect(DATABASE_URL);
 
 app.use(express.json())
 	
-app.get("/", (req: Request, res: Response) => {
+app.get("/", (_req: Request, res: Response) => {
   res.send("Working!");
 });
 

@@ -38,6 +38,25 @@ let UserController = class UserController {
             return JSON.stringify(error);
         }
     }
+    async update(id, body) {
+        try {
+            const data = new UserModel_1.UserModel({
+                _id: id,
+                name: body.name,
+                email: body.email,
+                password: body.password
+            });
+            const user = await UserModel_1.UserModel.findByIdAndUpdate(id, data);
+            console.log("user:", user);
+            if (!user) {
+                return "User not found";
+            }
+            return "User updated";
+        }
+        catch (error) {
+            return JSON.stringify(error);
+        }
+    }
     async remove(id) {
         try {
             const user = await UserModel_1.UserModel.findByIdAndDelete(id);
@@ -64,6 +83,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "create", null);
+__decorate([
+    (0, tsoa_1.Post)("/update/{id}"),
+    __param(1, (0, tsoa_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "update", null);
 __decorate([
     (0, tsoa_1.Delete)("/remove/{id}"),
     __metadata("design:type", Function),
