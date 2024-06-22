@@ -21,6 +21,14 @@ app.get("/", (_req: Request, res: Response) => {
 
 app.use("/users/", userRoutes);
 
+// Better return on route not found //
+app.use(function notFoundHandler(_req, res: Response) {
+  res.status(404).send({
+    message: "Route not Found",
+  });
+});
+//
+
 app.use(
     "/swagger", /* endereço do swagger */
     swaggerUi.serve,
