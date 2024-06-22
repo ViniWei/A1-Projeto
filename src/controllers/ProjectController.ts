@@ -4,6 +4,16 @@ import { ProjectModel as Project } from '../models/ProjectModel'
 
 @Route("projects")
 export default class ProjectController extends Controller {
+    @Get("/getAll")
+    public async getAll() {
+        try {
+            const projectList = Project.find();
+            return projectList;
+        } catch {
+            return "Internal server error";
+        }
+    }
+
     @Post("/create")
     public async create(@Body() body: { name: string, userId: string, cards: Array<{id: string, name: string, priority: Number, columnIndex: Number }>}): Promise<string> {
         const data = new Project({

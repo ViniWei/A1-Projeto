@@ -3,11 +3,11 @@ import ProjectController from '../controllers/ProjectController'
 
 const router = express.Router()
 
-//router.get("/getAll", async (_req: Request, res: Response) => {
-//    const controller = new UserController();
-//    const response = await controller.getAll();
-//    return res.send(response)
-//})
+router.get("/getAll", async (_req: Request, res: Response) => {
+    const controller = new ProjectController();
+    const response = await controller.getAll();
+    return res.send(response)
+})
 
 router.post("/create", async (req: Request, res: Response) => {
     const controller = new ProjectController();
