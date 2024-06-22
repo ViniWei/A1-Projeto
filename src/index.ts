@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import userRoutes from './routes/UserRoutes'
+import projectsRoutes from './routes/ProjectRoutes'
 import swaggerUi from 'swagger-ui-express'
 import { connect } from "./service/database"
 	
@@ -20,14 +21,7 @@ app.get("/", (_req: Request, res: Response) => {
 });
 
 app.use("/users/", userRoutes);
-
-// Better return on route not found //
-app.use(function notFoundHandler(_req, res: Response) {
-  res.status(404).send({
-    message: "Route not Found",
-  });
-});
-//
+app.use("/projects/", projectsRoutes);
 
 app.use(
     "/swagger", /* endereço do swagger */
@@ -38,6 +32,14 @@ app.use(
       },
     })
 );
+
+// Better return on route not found //
+app.use(function notFoundHandler(_req, res: Response) {
+  res.status(404).send({
+    message: "Route not Found",
+  });
+});
+//
 	
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);

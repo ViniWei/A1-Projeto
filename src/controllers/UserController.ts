@@ -1,8 +1,8 @@
-import { Route, Post, Body, Delete, Get } from 'tsoa'
+import { Route, Post, Body, Delete, Get, Controller } from 'tsoa'
 import { UserModel as User } from '../models/UserModel'
 
 @Route("users")
-export default class UserController {
+export default class UserController extends Controller {
     @Get("/getAll")
     public async getAll() {
         try {
