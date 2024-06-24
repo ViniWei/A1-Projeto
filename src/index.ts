@@ -1,5 +1,6 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
+import cors from "cors"
 import userRoutes from './routes/UserRoutes'
 import projectsRoutes from './routes/ProjectRoutes'
 import swaggerUi from 'swagger-ui-express'
@@ -14,6 +15,9 @@ const DATABASE_URL = process.env.DATABASE_URL || "";
 
 connect(DATABASE_URL);
 
+app.use(cors({
+    origin: "*"
+}))
 app.use(express.json())
 	
 app.get("/", (_req: Request, res: Response) => {
