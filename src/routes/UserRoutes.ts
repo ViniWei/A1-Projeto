@@ -15,6 +15,13 @@ router.post("/create", async (req: Request, res: Response) => {
     return res.send(response)
 })
 
+router.post("/login", async (req: Request, res: Response) => {
+    const controller = new UserController();
+    const response = await controller.login(req.body);
+    return res.send(response)
+})
+
+
 router.put("/update/:id", async (req: Request, res: Response) => {
     const id = req.params.id;
 

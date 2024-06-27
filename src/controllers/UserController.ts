@@ -3,6 +3,7 @@ import { UserModel as User } from '../models/UserModel'
 
 @Route("users")
 export default class UserController extends Controller {
+
     @Get("/getAll")
     public async getAll() {
         try {
@@ -12,6 +13,27 @@ export default class UserController extends Controller {
             return "Internal server error";
         }
     }
+
+    @Post("/login")
+    public async login(@Body() body: { email: string, password: string }) : Promise<{sucess: boolean, user?: object}> {
+        try {
+            const user = await User.findOne({email: body.email}).exec();
+
+            if (!user) {
+                return { sucess: false }; 
+            }
+
+            if (user.password != body.password) {
+                return { sucess: false }; 
+            }
+
+            console.log(user)
+            return { sucess: true, user: { name: user.name, email: user.email, password: user.password } }; 
+        } catch {
+            return { sucess: false }; 
+        }
+    }
+
 
     @Post("/create")
     public async create(@Body() body: { name: string, email: string, password: string }): Promise<string> {
